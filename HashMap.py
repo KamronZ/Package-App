@@ -1,11 +1,9 @@
 """HashMap is 0(1), key functions are:
 - An Array: to store data
-- Hash function: function to convert key into an array index
+- Hash function: function to convert key into an array index(not needed here)
 - Collision handling"""
 
 import csv
-
-import Package
 from Package import Package
 
 
@@ -82,18 +80,13 @@ class PackageHashTable(HashMap):
         with open('Package File.csv', mode='r', encoding='utf-8-sig') as infile:
             reader = csv.reader(infile)
             for rows in reader:
-                rows[0] = int(rows[0])
+                #rows[0] = int(rows[0]) should no longer be an issue after previous typecasting to int
                 new_package_obj = Package(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7])
                 self.package_hash_table.insert(rows[0], new_package_obj)
 
         self.package_hash_table.print_hash()
 
 
-    # def look_up_package(self, key: int):
-    #     if self.package_hash_table.look_up(key) is not None:
-    #         for pair in self.package_hash_table.look_up(key):
-    #             if pair[0] == key:
-    #                 return pair[1]
 
 
 
