@@ -1,5 +1,32 @@
-from HashMap import HashMap
-package_list_dict = HashMap()
+from HashMap import PackageHashTable
+import HashMap
+import Package
+
+package_list_dict = HashMap.PackageHashTable()
+package_list_dict.print_hash()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import csv
 # with open('Package File.csv', mode='r',encoding='utf-8-sig') as infile:
