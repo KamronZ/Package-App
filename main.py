@@ -4,9 +4,11 @@ import Distance
 
 
 # package_list_dict = HashMap.PackageHashTable()
-# package_list_dict.print_hash()
-#
-# distance_list_dict = Distance.create_distance_dict()
+distance_list_dict = Distance.populate_distance_table()
+print(distance_list_dict)
+# print(Distance.find_distance(' 177 W Price Ave', ' 6351 S 900 E', distance_list_dict))
+
+
 
 
 

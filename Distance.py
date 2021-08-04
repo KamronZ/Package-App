@@ -41,7 +41,7 @@ def get_dict_key_str(index, dict):
 between every point.  This works because csv file is ordered and each source  '''
 
 
-def find_distance(address_source, address_dest, dict: dict): \
+def find_distance(address_source, address_dest, dict): \
         # dict is in format of <string, List<int> >
     if address_source not in dict.keys():
         print("source address not found")
@@ -81,8 +81,8 @@ def populate_distance_table():
     return distance_dict
 
 
-distance_dict = populate_distance_table()
-print(distance_dict)
-
-print(find_distance(' 177 W Price Ave', ' 6351 S 900 E', distance_dict))
+#distance_dict = populate_distance_table()
+# print(distance_dict)
+#
+# print(find_distance(' 177 W Price Ave', ' 6351 S 900 E', distance_dict))
 # print(get_dict_key_str(2, distance_dict))
