@@ -80,7 +80,12 @@ class PackageHashTable(HashMap):
         with open('Package File.csv', mode='r', encoding='utf-8-sig') as infile:
             reader = csv.reader(infile)
             for rows in reader:
-                #rows[0] = int(rows[0]) should no longer be an issue after previous typecasting to int
+                rows[1] = rows[1].replace("North", "N")
+                rows[1] = rows[1].replace("South", "S")
+                rows[1] = rows[1].replace("East", "E")
+                rows[1] = rows[1].replace("West", "w")
+
+                #rows[0] = int(rows[0]) ## should no longer be an issue after previous typecasting to int
                 new_package_obj = Package(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7])
                 self.package_hash_table.insert(rows[0], new_package_obj)
 

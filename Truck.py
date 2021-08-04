@@ -8,7 +8,7 @@ class Truck:
         self.size = size
         self.package_list = [None] * self.size
         self.total_distance = 0.0
-        self.current_location = 'Western Governors University4001 South 700 East, Salt Lake City, UT 84107'
+        self.current_location = ''
 
 
 
