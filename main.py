@@ -10,7 +10,7 @@ print(distance_list_dict)
 
 
 
-
+print(len([1,2,3]))
 
 
 
