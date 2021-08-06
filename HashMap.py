@@ -7,9 +7,10 @@ import csv
 from Package import Package
 
 
+
 class HashMap:
     def __init__(self):
-        self.size = 40
+        self.size = 41
         self.map = [None] * self.size
 
     def _get_hash(self, key):  # this function is only needed if not working with keys having unique immutable IDs
@@ -19,7 +20,7 @@ class HashMap:
         # print("Hash key is: " + str(hash))
         return hash  # as of right now returns the exact same thing
 
-    def insert(self, key, value: Package):
+    def insert(self, key, value):
         key_hash = self._get_hash(key) - 1  # index value. -1 because package ID starts at 1, not 0
         key_value = [key, value]  # what to insert into that index.  in this case a list  with [key,value]
 
@@ -61,17 +62,16 @@ class HashMap:
                 package.print()
 
             index += 1
+        print('Done')
 
-    print('Done')
 
+class PackageHashTable():
 
-class PackageHashTable(HashMap):
 
     def __init__(self):
         super().__init__()
         # this table uses my HashMap class and will hold the Package objects
-
-        self.package_hash_table = HashMap()
+        self.hash_table = HashMap()
         # read cvs file and use these values to populate our table of Packages
         with open('Package File.csv', mode='r', encoding='utf-8-sig') as infile:
             reader = csv.reader(infile)
@@ -82,7 +82,5 @@ class PackageHashTable(HashMap):
                 rows[1] = rows[1].replace("West", "W")  # used to normalize address data
 
                 new_package_obj = Package(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7])
-                self.package_hash_table.insert(rows[0], new_package_obj)
-                self.package_list = self.package_hash_table
-
-
+                self.hash_table.insert(rows[0], new_package_obj)
+        #self.hash_table.print_hash()

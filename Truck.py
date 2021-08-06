@@ -1,10 +1,9 @@
-import Package
-import HashMap
 import Distance
 
-#from main import distance_list_dict
-
 distance_list_dict = Distance.populate_distance_table()
+
+
+
 class Truck:
     distance_list_dict = Distance.populate_distance_table()
     package_list = list
@@ -14,12 +13,11 @@ class Truck:
     def __init__(self, package_list, size):
 
         self.size = size
-        self.package_list = [None] * self.size
+        self.package_list = package_list #[None] * self.size
         self.total_distance = 0.0
         self.current_location = ' 4001 South 700 E'
 
     def deliver_NNA(self):
-
 
         index = 0
         '''count will track what index the smallest distance was found at.  count increments ONLY when a swap occurs!
@@ -27,16 +25,17 @@ class Truck:
         a swap did not occur earlier in  the list but a swap does need to occur now.  If a swap never happens, that means
         count will pop the package at the index of count. '''
         count = 0
-        closest_address = distance_list_dict.find_distance(self.current_location,  # first distance from starting point
-                                                           # to first package's address from list
-                                                           self.package_list[0].address, distance_list_dict)
+        closest_address = Distance.find_distance(self.current_location,  # first distance from starting point
+                                                 # to first package's address from list
+                                                 self.package_list[0].address, distance_list_dict.hash_table)
         i = 0
-        while i < len(self.package_list): # Do inner loop for every package object current still in the list of packages
+        while i < len(
+                self.package_list):  # Do inner loop for every package object current still in the list of packages
             for package in range(len(self.package_list)):  # for every package in the list
                 # distance value acquired from incremented index
                 temp_address_distance = distance_list_dict.find_distance(self.current_location,
                                                                          self.package_list[index].address,
-                                                                         distance_list_dict)
+                                                                         distance_list_dict.hash_table)
 
                 if count == len(self.package_list):  # if count is at the last index then a swap was made everytime,
                     # or a swap was made on the last index of list
@@ -66,7 +65,8 @@ class Truck:
                 else:  # if condition failed, move to next entry
                     index += 1
             i += 1
+
     def hub_return(self):
         self.total_distance += distance_list_dict.find_distance(self.current_location,
-                                                                ' 4001 South 700 E',distance_list_dict)
+                                                                ' 4001 South 700 E', distance_list_dict)
         self.current_location = '4001 South 700 E'

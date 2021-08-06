@@ -3,7 +3,7 @@ import csv
 from collections import OrderedDict
 
 
-def create_distance_dict():
+def create_distance_dict(): # clean and normalize data
     with open('Distance Table.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         distance_dict = OrderedDict()
@@ -41,7 +41,7 @@ def get_dict_key_str(index, dict):
 between every point.  This works because csv file is ordered and each source  '''
 
 
-def find_distance(address_source, address_dest, dict): \
+def find_distance(address_source, address_dest, dict):
         # dict is in format of <string, List<int> >
     if address_source not in dict.keys():
         print("source address not found")
@@ -50,13 +50,15 @@ def find_distance(address_source, address_dest, dict): \
         print("destination address not found.")
         return -1
     index = 0
+
     for key in dict.keys():
-        if key == address_dest:
+        if key == address_dest: # checks for destination rather than source.  If i get the destination index then all I
+            # need to do is  access the dictionary key that is at the index value
             break
-        else:
+        else: # check the next entry
             index += 1
-    list = dict[address_source]
-    return list[index]
+    list = dict[address_source] # create a list for the key, value pair
+    return list[index] # grab the value at the column matching the index
 
 
 def populate_distance_table():
@@ -71,8 +73,6 @@ def populate_distance_table():
                 # PSUEDO CODE-- value[index] = the dictionary that is at the value's index[dictionary_index] (gettting reciprocal)
                 dictionary_list = distance_dict[get_dict_key_str(index, distance_dict)]
                 value[index] = dictionary_list[dictionary_index]
-                print()
-
                 index += 1
 
             else:
