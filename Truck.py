@@ -1,10 +1,12 @@
 import Package
 import HashMap
 import Distance
-from main import distance_list_dict
 
+#from main import distance_list_dict
 
+distance_list_dict = Distance.populate_distance_table()
 class Truck:
+    distance_list_dict = Distance.populate_distance_table()
     package_list = list
     current_location = str
     total_distance = float
@@ -17,6 +19,7 @@ class Truck:
         self.current_location = ' 4001 South 700 E'
 
     def deliver_NNA(self):
+
 
         index = 0
         '''count will track what index the smallest distance was found at.  count increments ONLY when a swap occurs!
@@ -63,3 +66,7 @@ class Truck:
                 else:  # if condition failed, move to next entry
                     index += 1
             i += 1
+    def hub_return(self):
+        self.total_distance += distance_list_dict.find_distance(self.current_location,
+                                                                ' 4001 South 700 E',distance_list_dict)
+        self.current_location = '4001 South 700 E'
