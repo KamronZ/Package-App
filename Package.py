@@ -10,7 +10,7 @@ class Package:
 
     def __init__(self, package_ID, address, city, state, zip, deadline, weight, status):
         self.package_ID = package_ID
-        self.address = address
+        self.address =" " + address
         self.city = city
         self.state = state
         self.zip = zip

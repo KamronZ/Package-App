@@ -15,7 +15,7 @@ class Truck:
         self.size = size
         self.package_list = package_list #[None] * self.size
         self.total_distance = 0.0
-        self.current_location = ' 4001 South 700 E'
+        self.current_location = ' HUB'
 
     def deliver_NNA(self):
 
@@ -27,15 +27,15 @@ class Truck:
         count = 0
         closest_address = Distance.find_distance(self.current_location,  # first distance from starting point
                                                  # to first package's address from list
-                                                 self.package_list[0].address, distance_list_dict.hash_table)
+                                                 self.package_list[0].address, distance_list_dict)
         i = 0
         while i < len(
                 self.package_list):  # Do inner loop for every package object current still in the list of packages
             for package in range(len(self.package_list)):  # for every package in the list
                 # distance value acquired from incremented index
-                temp_address_distance = distance_list_dict.find_distance(self.current_location,
+                temp_address_distance = Distance.find_distance(self.current_location,
                                                                          self.package_list[index].address,
-                                                                         distance_list_dict.hash_table)
+                                                                         distance_list_dict)
 
                 if count == len(self.package_list):  # if count is at the last index then a swap was made everytime,
                     # or a swap was made on the last index of list

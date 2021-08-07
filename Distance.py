@@ -58,7 +58,7 @@ def find_distance(address_source, address_dest, dict):
         else: # check the next entry
             index += 1
     list = dict[address_source] # create a list for the key, value pair
-    return list[index] # grab the value at the column matching the index
+    return float(list[index]) # grab the value at the column matching the index
 
 
 def populate_distance_table():
