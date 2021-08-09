@@ -29,7 +29,8 @@ def main():
     # print(distance_list_dict)
     # print(Distance.find_distance(' HUB', ' 6351 S 900 E', distance_list_dict))
 
-    truck_one_prio_package_list_ID = [1, 13, 14, 15, 16, 19, 20, 34, 37, 40]  # 15 needs to reach destination by 9am,
+    truck_one_prio_package_list_ID = [ 14,13,  15,16,17,5,3, 19, 20, 34, 37,40]
+    #truck_one_prio_package_list_ID = [1, 13, 14, 15, 16, 19, 20, 34, 37, 40]  # 15 needs to reach destination by 9am,
     # everything else by 10:30
 
     truck_one_package_list_ID = [2, 4, 5, 8, 9, 10, 11, 12, 35, 39]
@@ -38,7 +39,7 @@ def main():
     truck_two_package_list_ID = [17, 19, 21, 22, 23, 24, 25, 26, 27, 28, 32, 33, 36, 38]
 
     truck1 = Truck(id_to_package(truck_one_prio_package_list_ID), 16)
-    print(truck1.package_list[0].address)
+
 
 
 
