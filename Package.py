@@ -1,14 +1,13 @@
+import datetime
+
 class Package:
-    # package_ID = 0
-    # address = ""
-    # city = ''
-    # state = ''
-    # zip = ''
-    # deadline = ''
-    # weight = ''
-    # special = ''
+
 
     def __init__(self, package_ID, address, city, state, zip, deadline, weight, special):
+        today = today = datetime.datetime.today()
+        self.left_hub_timestamp = datetime.datetime(today.year, today.month, today.day, 0, 00, 0, 0)
+        self.delivery_timestamp = datetime.datetime(today.year, today.month, today.day, 0, 00, 0, 0)
+
         self.package_ID = package_ID
         self.address =" " + address
         self.city = city
@@ -21,10 +20,24 @@ class Package:
     def print(self):
         print("Package ID: ", self.package_ID, "; Address: ", self.address, "; City: ", self.city,
               "; State: ", self.state, ";Zip ", self.zip, ";Deadline: ", self.deadline, "Package Weight: "
-              , self.weight, "; Package Special Notes: ", self.special)
+              , self.weight, "; Package Special Notes: ", self.special, end='\n')
 
     def get_package_ID(self):
         return self.package_ID
 
     def update_package_special(self, updated_special):
         self.special = updated_special
+    def update_package_delivery_time(self,delivery_time):
+        self.delivery_timestamp = delivery_time
+
+    def update_package_lefthub_time(self,left_hub_timestamp):
+        self.left_hub_timestamp = left_hub_timestamp
+
+
+    def get_package_status(self,start_range,end_range):
+       # print(self.package_ID, "Left the Hub at:", self.left_hub_timestamp)
+
+
+        if self.delivery_timestamp >= start_range and self.delivery_timestamp <= end_range:
+            self.print()
+            print("Delivered at:", self.delivery_timestamp)
