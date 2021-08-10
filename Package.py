@@ -8,7 +8,7 @@ class Package:
     # weight = ''
     # special = ''
 
-    def __init__(self, package_ID, address, city, state, zip, deadline, weight, status):
+    def __init__(self, package_ID, address, city, state, zip, deadline, weight, special):
         self.package_ID = package_ID
         self.address =" " + address
         self.city = city
@@ -16,7 +16,7 @@ class Package:
         self.zip = zip
         self.deadline = deadline
         self.weight = weight
-        self.special = status
+        self.special = special
 
     def print(self):
         print("Package ID: ", self.package_ID, "; Address: ", self.address, "; City: ", self.city,

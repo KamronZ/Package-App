@@ -13,7 +13,7 @@ def create_distance_dict(): # clean and normalize data
             key = key.replace("North", "N")
             key = key.replace("South", "S")
             key = key.replace("East", "E")
-            key = key.replace("West", "w")
+            key = key.replace("West", "W")
             distance_dict[key] = line[2:30]
 
     return distance_dict

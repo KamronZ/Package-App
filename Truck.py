@@ -14,13 +14,13 @@ class Truck:
     total_distance = float
 
 
-    def __init__(self, package_list, size):
-
+    def __init__(self, package_list, size, name):
 
         today = today = datetime.datetime.today()
 
         self.current_time = datetime.datetime(today.year,today.month,today.day,8,00,0,0)
 
+        self.name = name
         self.size = size
         self.package_list = package_list
         self.total_distance = 0.0
@@ -68,16 +68,18 @@ class Truck:
                 else:  # distance was not less
                     index += 1  # go to next entry
 
-            print("package index is: ", package_index)
-            print("Closet address is:", closest_address, " miles away")
+            # print("package index is: ", package_index)
+            # print("Closet address is:", closest_address, " miles away")
 
             self.current_location = new_package.address
-            print("Current address is: ", self.current_location)
+            # print("Current address is: ", self.current_location)
 
             self.current_time = Time.convert_distance_to_time(self.current_time,closest_address)
-            print("Current time is: ", self.current_time)
+            print("Current time is: ", self.current_time, "\nPromised delivery time was: ",
+                  self.package_list[package_index].deadline)
 
-            print("Packing being removed from list is: ", self.package_list[package_index].print())
+
+            print("Packing being removed special notes: ", self.package_list[package_index].special)
             self.package_list.pop(package_index)
 
             self.total_distance += closest_address
