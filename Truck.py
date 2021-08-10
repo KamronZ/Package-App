@@ -19,18 +19,26 @@ class Truck:
 
     def deliver_NNA(self):
 
+        out_index = 0  # outer loop
         index = 0  # for inner loop
         package_index = 0
         new_package = self.package_list[0]
-        i = 0  # outer loop
-        print(len(self.package_list))
 
         closest_address = Distance.find_distance(self.current_location,  # first distance from starting point
                                                  # to first package's address from list
                                                  self.package_list[0].address, distance_list_dict)
 
-        while 0 < len(self.package_list) - i:  # Do inner loop for every package object current still in the list of packages
-            for package in list(self.package_list):  # for every package in the list
+        while 0 < len(
+                self.package_list):  # Do inner loop for every package object current still in the list of packages
+            index = 0  # for inner loop
+            package_index = 0
+            new_package = self.package_list[0]
+
+            closest_address = Distance.find_distance(self.current_location,  # first distance from starting point
+                                                     # to first package's address from list
+                                                     self.package_list[0].address, distance_list_dict)
+
+            for package in self.package_list:  # for every package in the list
                 # distance value acquired from incremented index
 
                 temp_address_distance = Distance.find_distance(self.current_location,
@@ -46,17 +54,10 @@ class Truck:
                     package_index = index
                     index += 1  # temp_address_distance moves to next entry in package_list
 
-                else:
-                    index += 1
-            i += 1
-            print("end of loop ")  # debugging
+                else:  # distance was not less
+                    index += 1  # go to next entry
 
-            print("count is: ", index)
-            print("index is: ", index)
             print("package index is: ", package_index)
-
-            print("len of list is: ", len(self.package_list))
-
             print("Closet address is:", closest_address)
 
             self.current_location = new_package.address
@@ -72,6 +73,8 @@ class Truck:
                 i.print()
 
     def hub_return(self):
-        self.total_distance += distance_list_dict.find_distance(self.current_location,
-                                                                ' 4001 South 700 E', distance_list_dict)
-        self.current_location = '4001 South 700 E'
+        self.total_distance += Distance.find_distance(self.current_location,
+                                                      ' HUB', distance_list_dict)
+        self.current_location = ' HUB'
+        print("Package has returned to hub...")
+        print("Total distance traveled to deliver list: ", self.total_distance)
