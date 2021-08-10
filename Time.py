@@ -3,26 +3,44 @@ import math
 
 
 
-# def convert_distance_to_time(starting_time, distance):
-#     start_hours = starting_time.hour
-#     start_min = starting_time.minute
-#     start_sec = start_time.second
-#
-#
-#
-#
-#
-#     print("hours: " + str(hours))
-#
-#     print("minutes: " + str(minutes))
-#     print("seconds: " + str(seconds))
-#
-#
-#
-#     return str(datetime.time(start_hours+hours,start_min,start_sec + seconds))
-#
-#
-# start_time = datetime.time(8, 00, 00)
-# print(start_time)
-#
-# print(convert_distance_to_time(start_time, 18))
+def convert_distance_to_time(current_time,distance):
+
+    hours = distance / 18
+    minutes = hours * 60
+    hours, minutes = divmod(minutes,60)
+
+    end_time = current_time + datetime.timedelta(hours=hours,minutes =minutes)
+    return end_time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+start_of_day = datetime.time(8,00,00)
+
+
+
+
+

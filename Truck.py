@@ -1,4 +1,7 @@
 import Distance
+import datetime
+
+import Time
 from Package import Package
 
 distance_list_dict = Distance.populate_distance_table()
@@ -10,14 +13,22 @@ class Truck:
     current_location = str
     total_distance = float
 
+
     def __init__(self, package_list, size):
 
+
+        today = today = datetime.datetime.today()
+
+        self.current_time = datetime.datetime(today.year,today.month,today.day,8,00,0,0)
+
         self.size = size
-        self.package_list = package_list  # [None] * self.size
+        self.package_list = package_list
         self.total_distance = 0.0
-        self.current_location = ' HUB'
+        self.current_location = ' HUB' # space is added for data normalization. All entries also have this space.
+
 
     def deliver_NNA(self):
+        print("STARTING DELIVERY, current time is:  ", self.current_time)
 
         out_index = 0  # outer loop
         index = 0  # for inner loop
@@ -58,17 +69,20 @@ class Truck:
                     index += 1  # go to next entry
 
             print("package index is: ", package_index)
-            print("Closet address is:", closest_address)
+            print("Closet address is:", closest_address, " miles away")
 
             self.current_location = new_package.address
-            print("Current location is: ", self.current_location)
+            print("Current address is: ", self.current_location)
+
+            self.current_time = Time.convert_distance_to_time(self.current_time,closest_address)
+            print("Current time is: ", self.current_time)
 
             print("Packing being removed from list is: ", self.package_list[package_index].print())
             self.package_list.pop(package_index)
 
             self.total_distance += closest_address
             print("Total distance: ", self.total_distance)
-            print("Package_list now contains:  ")
+            print("Truck now contains the following packages:  ")
             for i in self.package_list:
                 i.print()
 
@@ -77,4 +91,5 @@ class Truck:
                                                       ' HUB', distance_list_dict)
         self.current_location = ' HUB'
         print("Package has returned to hub...")
-        print("Total distance traveled to deliver list: ", self.total_distance)
+        print("Total distance traveled to deliver list: ", self.total_distance, end='\n')
+
