@@ -7,8 +7,12 @@ from Package import Package
 from HashMap import PackageHashTable
 
 distance_list_dict = Distance.populate_distance_table()
+# FIXME
 list_of_all_packages_after_delivery = []
-today = today = datetime.datetime.today()
+#
+today = datetime.datetime.today()
+
+
 class Truck:
 
     distance_list_dict = Distance.populate_distance_table()
@@ -17,30 +21,33 @@ class Truck:
     current_location = str
     total_distance = float
 
+
     def __init__(self, package_list, size, name):
 
-
-
-        self.current_time = datetime.datetime(today.year, today.month, today.day, 8, 00, 0, 0)
-        # self.hub_leave_time = datetime.datetime(today.year,today.month,today.day,0,00,0,0)
+        self.start_of_day = datetime.datetime(today.year, today.month, today.day, 8, 00, 0, 0) # trucks being delivery
+        self.hub_time = datetime.datetime(today.year, today.month, today.day, 0, 00, 0, 0) # time trucks at hub
+        self.current_time = datetime.datetime(today.year, today.month, today.day, 8, 00, 0, 0) # time based on truck travel time
 
         self.name = name
         self.size = size
-        self.package_list = package_list
+        self.package_list = package_list #list of packages loadead
         self.total_distance = 0.0
         self.current_location = ' HUB'  # space is added for data normalization. All entries also have this space.
 
     def deliver_NNA(self):
+
         print("STARTING DELIVERY, current time is:  ", self.current_time)
 
-        out_index = 0  # outer loop
-        index = 0  # for inner loop
-        package_index = 0
-        new_package = self.package_list[0]
-
-        closest_address = Distance.find_distance(self.current_location,  # first distance from starting point
-                                                 # to first package's address from list
-                                                 self.package_list[0].address, distance_list_dict)
+        # out_index = 0  # outer loop
+        # index = 0  # for inner loop
+        # package_index = 0
+        # new_package = self.package_list[0]
+        #
+        # closest_address = Distance.find_distance(self.current_location,  # first distance from starting point
+        #                                          # to first package's address from list
+        #                                          self.package_list[0].address, distance_list_dict)
+        if self.total_distance == 0: # Truck is being loaded for the first time
+            self.hub_time = datetime.datetime(today.year, today.month, today.day, 8, 00, 0, 0) # take
 
         while 0 < len(
                 self.package_list):  # Do inner loop for every package object current still in the list of packages
@@ -79,8 +86,13 @@ class Truck:
             print("Delivery time is: ", self.current_time, "\nPromised delivery time was: ",
                   self.package_list[package_index].deadline)
 
-            new_package.update_package_delivery_time(self.current_time)
+            new_package.update_package_delivery_time(self.current_time) # update package delivery time
+
+            new_package.update_package_lefthub_time(self.hub_time)
             list_of_all_packages_after_delivery.append(new_package)
+
+
+
 
             if self.package_list[package_index].special != "":
                 print("Packing being removed special notes: ", self.package_list[package_index].special)
@@ -104,6 +116,7 @@ class Truck:
         self.current_location = ' HUB'
         print(self.name, "has returned to hub...")
         print("Total distance traveled to deliver load and return to HUB: ", self.total_distance, end='\n')
+        self.hub_time = Time.convert_distance_to_time(self.start_of_day, self.total_distance)
 
 
 

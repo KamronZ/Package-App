@@ -1,6 +1,5 @@
 import Distance
-import datetime
-from HashMap import PackageHashTable, HashMap
+from HashMap import PackageHashTable
 from Truck import Truck,list_of_all_packages_after_delivery,today
 
 package_list_dict = PackageHashTable()
@@ -26,8 +25,6 @@ def id_to_package(id_list):
 def main():
 
     distance_list_dict = Distance.populate_distance_table()
-
-
 
     total_miles_traveled = 0.0 # tracks total miles for both trucks
     truck_one_prio_package_list_ID = [1,13, 14, 15, 16, 19, 20,22,23,34,35, 37,39, 40]  # 15 needs to reach destination by 9am,
@@ -68,54 +65,56 @@ def main():
 
     total_miles_traveled = truck1.total_distance + truck2.total_distance
 
-    print("Make a selection:\n"
-          "1: See all packages delivered for specific time range\n"
-          "2: See total distance traveled by all trucks\n"
-          "3: Exit"
-          )
 
-    choice = int(input("Make your selection: "))
-    while(choice != 3):
-        if choice == 1:
+    # package_list.hash_table.print_hash()
 
-
-            start_hour = int(input("Enter hour you wish to set range to: "))
-            start_minute = int(input("Enter minute you was to set start range to: "))
-
-            end_hour = int(input("Enter hour you wish to end range at: "))
-            end_minute = int(input("Enter minute you was to end range at: "))
-
-
-            start_range = datetime.datetime(today.year, today.month, today.day, start_hour, start_minute, 00)
-            end_range = datetime.datetime(today.year, today.month, today.day, end_hour, end_minute, 00)
-
-            for package in list_of_all_packages_after_delivery:
-                package.get_package_status(start_range, end_range)
-
-        print("Make a selection:\n"
-              "1: See all packages delivered for specific time range\n"
-              "2: See total distance traveled by all trucks\n"
-              "3: Exit"
-              )
-        choice = int(input("Make your selection: "))
-        if choice == 2:
-            print("Total distance traveled is: ", total_miles_traveled)
-            print("Make a selection:\n"
-                  "1: See all packages delivered for specific time range\n"
-                  "2: See total distance traveled by all trucks\n"
-                  "3: Exit"
-                  )
-
-            choice = int(input())
-        if choice == 3:
-            print("Done")
-        else:
-            print("Please make a valid selection")
-            print("Make a selection:\n"
-                  "1: See all packages delivered for specific time range\n"
-                  "2: See total distance traveled by all trucks\n"
-                  "3: Exit"
-                  )
+    # print("Make a selection:\n"
+    #       "1: See all packages delivered for specific time range\n"
+    #       "2: See total distance traveled by all trucks\n"
+    #       "3: Exit"
+    #       )
+    #
+    # choice = int(input("Make your selection: "))
+    # while(choice != 3):
+    #     if choice == 1:
+    #
+    #         start_hour = int(input("Enter hour you wish to set range to: "))
+    #         start_minute = int(input("Enter minute you was to set start range to: "))
+    #
+    #         end_hour = int(input("Enter hour you wish to end range at: "))
+    #         end_minute = int(input("Enter minute you was to end range at: "))
+    #
+    #
+    #         start_range = datetime.datetime(today.year, today.month, today.day, start_hour, start_minute, 00)
+    #         end_range = datetime.datetime(today.year, today.month, today.day, end_hour, end_minute, 00)
+    #
+    #         for package in list_of_all_packages_after_delivery:
+    #             package.get_package_status(start_range, end_range)
+    #
+    #     print("Make a selection:\n"
+    #           "1: See all packages delivered for specific time range\n"
+    #           "2: See total distance traveled by all trucks\n"
+    #           "3: Exit"
+    #           )
+    #     choice = int(input("Make your selection: "))
+    #     if choice == 2:
+    #         print("Total distance traveled is: ", total_miles_traveled)
+    #         print("Make a selection:\n"
+    #               "1: See all packages delivered for specific time range\n"
+    #               "2: See total distance traveled by all trucks\n"
+    #               "3: Exit"
+    #               )
+    #
+    #         choice = int(input())
+    #     if choice == 3:
+    #         print("Done")
+    #     else:
+    #         print("Please make a valid selection")
+    #         print("Make a selection:\n"
+    #               "1: See all packages delivered for specific time range\n"
+    #               "2: See total distance traveled by all trucks\n"
+    #               "3: Exit"
+    #               )
 
 
 

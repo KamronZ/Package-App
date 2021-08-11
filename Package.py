@@ -3,7 +3,7 @@ import datetime
 class Package:
 
 
-    def __init__(self, package_ID, address, city, state, zip, deadline, weight, special):
+    def __init__(self, package_ID, address, city, state, zip, deadline, weight, special,left_hub_timestamp, delivery_timestamp):
         today = today = datetime.datetime.today()
         self.left_hub_timestamp = datetime.datetime(today.year, today.month, today.day, 0, 00, 0, 0)
         self.delivery_timestamp = datetime.datetime(today.year, today.month, today.day, 0, 00, 0, 0)
@@ -20,7 +20,8 @@ class Package:
     def print(self):
         print("Package ID: ", self.package_ID, "; Address: ", self.address, "; City: ", self.city,
               "; State: ", self.state, ";Zip ", self.zip, ";Deadline: ", self.deadline, "Package Weight: "
-              , self.weight, "; Package Special Notes: ", self.special, end='\n')
+              , self.weight, "; Package Special Notes: ", self.special, "Left hub at:",self.left_hub_timestamp,
+              "; Delivered at: ", self.delivery_timestamp,end='\n')
 
     def get_package_ID(self):
         return self.package_ID

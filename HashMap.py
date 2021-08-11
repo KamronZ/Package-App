@@ -5,6 +5,11 @@
 
 import csv
 from Package import Package
+import datetime
+
+today = datetime.datetime.today()
+left_hub_time = datetime.datetime(today.year, today.month, today.day, 0, 00, 0, 0)
+delivered_time = datetime.datetime(today.year, today.month, today.day, 0, 00, 0, 0)
 
 
 class HashMap:
@@ -82,7 +87,8 @@ class PackageHashTable():
                 rows[1] = rows[1].replace("East", "E")  # used to normalize address data
                 rows[1] = rows[1].replace("West", "W")  # used to normalize address data
 
-                new_package_obj = Package(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7])
+                new_package_obj = Package(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7],
+                                          left_hub_time,delivered_time )
                 self.hash_table.insert(rows[0], new_package_obj)
 
 
