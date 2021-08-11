@@ -35,10 +35,18 @@ class Package:
         self.left_hub_timestamp = left_hub_timestamp
 
 
-    def get_package_status(self,start_range,end_range):
+    def get_package_range(self, start_range, end_range):
        # print(self.package_ID, "Left the Hub at:", self.left_hub_timestamp)
-
-
         if self.delivery_timestamp >= start_range and self.delivery_timestamp <= end_range:
-            self.print()
-            print("Delivered at:", self.delivery_timestamp)
+            print("Package id:",self.package_ID,"| Was delivered at:", self.delivery_timestamp)
+
+    def package_status(self, time):
+        if self.left_hub_timestamp > time:
+             print("Package has not left Hub")
+        if self.left_hub_timestamp <= time and self.delivery_timestamp > time:
+            print("Package is enroute")
+        elif self.left_hub_timestamp <= time and self.delivery_timestamp <= time:
+            print("Package was delivered at: ", self.delivery_timestamp)
+
+
+
