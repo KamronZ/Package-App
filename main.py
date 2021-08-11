@@ -61,6 +61,7 @@ def main():
     truck2.hub_return()
 
     total_miles_traveled = truck1.total_distance + truck2.total_distance
+    package_list_dict.hash_table.print_hash()
 
     print("Make a selection:\n"
           "1: See all packages delivered for specific time range\n"
@@ -94,7 +95,7 @@ def main():
                   )
             choice = int(input("Make your selection: "))
         if choice == 2:
-            print("Total distance traveled is: ", total_miles_traveled)
+            print("Total distance traveled is: ", total_miles_traveled, " miles")
             print("Make a selection:\n"
                   "1: See all packages delivered for specific time range\n"
                   "2: See total distance traveled by all trucks\n"
