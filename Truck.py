@@ -1,3 +1,4 @@
+
 import Distance
 import datetime
 import Time
@@ -99,6 +100,7 @@ class Truck:
 
             for i in self.package_list:
                 i.print()
+
 
     def hub_return(self):
         self.total_distance += Distance.find_distance(self.current_location,

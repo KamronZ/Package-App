@@ -2,6 +2,7 @@ import datetime
 
 
 class Package:
+    package_ID = int
 
     def __init__(self, package_ID, address, city, state, zip, deadline, weight, special, left_hub_timestamp,
                  delivery_timestamp):
@@ -21,7 +22,7 @@ class Package:
     def print(self):
         print("Package ID: ", self.package_ID, "; Address: ", self.address, "; City: ", self.city,
               "; State: ", self.state, ";Zip ", self.zip, ";Deadline: ", self.deadline, "Package Weight: "
-              , self.weight, "; Package Special Notes: ", self.special, "Left hub at:", self.left_hub_timestamp,
+              , self.weight, "; Package Special Notes: ", self.special, ";Left hub at:", self.left_hub_timestamp,
               "; Delivered at: ", self.delivery_timestamp, end='\n')
 
     def get_package_ID(self):
@@ -37,14 +38,21 @@ class Package:
         self.left_hub_timestamp = left_hub_timestamp
 
     def get_package_range(self, start_range, end_range):
-        if start_range <= self.delivery_timestamp <= end_range:
-            print("Package id:", self.package_ID, "| Was delivered at:", self.delivery_timestamp," To:",self.address,self.city
-                  ,self.state)
+        if start_range >= self.delivery_timestamp <= end_range:
+            print("Package id:", self.package_ID, "| Was Delivered To:",self.address,self.city
+                  ,self.state, "| At", self.delivery_timestamp)
+        if self.left_hub_timestamp > end_range:
+            print("Package id: ",self.package_ID, "| Is at the HUB |")
+        if self.left_hub_timestamp <= start_range and self.delivery_timestamp >= end_range:
+            print("Package id: ", self.package_ID, "| Is enroute |")
+
+
 
     def package_status(self, time):
         if self.left_hub_timestamp > time:
             print("Package has not left Hub")
-        elif self.left_hub_timestamp <= time < self.delivery_timestamp:
+        if self.left_hub_timestamp <= time < self.delivery_timestamp:
             print("Package is enroute")
-        elif self.left_hub_timestamp <= time and self.delivery_timestamp <= time:
+        if self.left_hub_timestamp <= time and self.delivery_timestamp <= time:
             print("Package was delivered at: ", self.delivery_timestamp)
+

@@ -26,7 +26,7 @@ def main():
     distance_list_dict = Distance.populate_distance_table()
 
     total_miles_traveled = 0.0  # tracks total miles for both trucks
-    truck_one_prio_package_list_ID = [1, 13, 14, 15, 16, 19, 20, 22, 23, 34, 35, 37, 39,
+    truck_one_prio_package_list_ID = [1,7, 13, 14, 15, 16, 20, 22, 23, 34, 35, 37, 39,
                                       40]  # 15 needs to reach destination by 9am,
     # everything else by 10:30
     truck_one_package_list_ID = [2, 4, 5, 8, 9, 10, 11, 12]  # all of these are end of the day
@@ -67,11 +67,12 @@ def main():
           "1: See all packages delivered for specific time range\n"
           "2: See total distance traveled by all trucks\n"
           "3: See package status at a specific time\n"
-          "4: Exit"
+          "4: Run the entire simulation and give all packages sorted by delivered time (earliest to latest)\n"
+          "5: Exit"
           )
 
     choice = int(input("Make your selection: "))
-    while choice != 4:
+    while choice != 5:
 
         if choice == 1:
 
@@ -84,24 +85,27 @@ def main():
             start_range = datetime.datetime(today.year, today.month, today.day, start_hour, start_minute, 00)
             end_range = datetime.datetime(today.year, today.month, today.day, end_hour, end_minute, 00)
 
-            for package in list_of_all_packages_after_delivery:
+            for package in sorted(list_of_all_packages_after_delivery, key=lambda x: x.delivery_timestamp):
                 package.get_package_range(start_range, end_range)
 
             print("Make a selection:\n"
-                  "1: See all packages delivered for specific time range\n"
+                  "1: See status of all packages at a specific time range(sorted by earliest delivered)\n"
                   "2: See total distance traveled by all trucks\n"
                   "3: See package status at a specific time\n"
-                  "4: Exit"
+                  "4: Run the entire simulation and give all packages sorted by delivered time (earliest to latest)\n"
+                  "5: Exit"
                   )
             choice = int(input("Make your selection: "))
         if choice == 2:
-            print("Total distance traveled is: ", total_miles_traveled, " miles")
+            print("Total distance traveled is: ", round(total_miles_traveled,2), " miles")
             print("Make a selection:\n"
                   "1: See all packages delivered for specific time range\n"
                   "2: See total distance traveled by all trucks\n"
                   "3: See package status at a specific time\n"
-                  "4: Exit"
+                  "4: Run the entire simulation and give all packages sorted by delivered time (earliest to latest)\n"
+                  "5: Exit"
                   )
+
             choice = int(input("Make your selection: "))
         if choice == 3:
             package_id = int(input("Enter package ID to check: "))
@@ -112,7 +116,33 @@ def main():
                 if int(package.package_ID) == package_id:
                     package.package_status(time_to_check)
 
+            print("Make a selection:\n"
+                  "1: See all packages delivered for specific time range\n"
+                  "2: See total distance traveled by all trucks\n"
+                  "3: See package status at a specific time\n"
+                  "4: Run the entire simulation and give all packages sorted by delivered time (earliest to latest)\n"
+                  "5: Exit"
+                  )
+            choice = int(input("Make your selection: "))
 
+        if choice == 4:
+            for package in sorted(list_of_all_packages_after_delivery, key=lambda x: x.delivery_timestamp):
+                package.print()
+            print("Make a selection:\n"
+                  "1: See all packages delivered for specific time range\n"
+                  "2: See total distance traveled by all trucks\n"
+                  "3: See package status at a specific time\n"
+                  "4: Run the entire simulation and give all packages sorted by delivered time (earliest to latest)\n"
+                  "5: Exit"
+                  )
+            choice = int(input(("Make your selection: ")))
+
+        if choice == 5:
+            print("DONE")
+
+
+        else:
+            print("Please make a valid selection")
             print("Make a selection:\n"
                   "1: See all packages delivered for specific time range\n"
                   "2: See total distance traveled by all trucks\n"
@@ -120,17 +150,6 @@ def main():
                   "4: Exit"
                   )
             choice = int(input("Make your selection: "))
-        if choice == 4:
-            print("Done")
-        # else:
-        #     # print("Please make a valid selection")
-        #     # print("Make a selection:\n"
-        #     #       "1: See all packages delivered for specific time range\n"
-        #     #       "2: See total distance traveled by all trucks\n"
-        #     #       "3: See package status at a specific time\n"
-        #     #       "4: Exit"
-        #     #       )
-        #     # choice = int(input("Make your selection: "))
 
 
 if __name__ == "__main__":
