@@ -27,19 +27,11 @@ class Truck:
         self.package_list = package_list  # list of packages loadead
         self.total_distance = 0.0
         self.current_location = ' HUB'  # space is added for data normalization. All entries also have this space.
-
+    #0(n^2)
     def deliver_NNA(self):
 
         print("STARTING DELIVERY, current time is:  ", self.current_time)
 
-        # out_index = 0  # outer loop
-        # index = 0  # for inner loop
-        # package_index = 0
-        # new_package = self.package_list[0]
-        #
-        # closest_address = Distance.find_distance(self.current_location,  # first distance from starting point
-        #                                          # to first package's address from list
-        #                                          self.package_list[0].address, distance_list_dict)
         if self.total_distance == 0:  # Truck is being loaded for the first time
             self.hub_time = datetime.datetime(today.year, today.month, today.day, 8, 00, 0, 0)
 
@@ -69,40 +61,40 @@ class Truck:
                 else:  # distance was not less
                     index += 1  # go to next entry
 
-            print(self.name, "'s current location: ", self.current_location)
-            print(self.name, "'s is headed to: ", new_package.address)
+            # print(self.name, "'s current location: ", self.current_location)
+            # print(self.name, "'s is headed to: ", new_package.address)
             self.current_location = new_package.address
             # print("Current address is: ", self.current_location)
 
-            print("Package ID being delivered is: ", self.package_list[package_index].package_ID)
+            # print("Package ID being delivered is: ", self.package_list[package_index].package_ID)
 
             self.current_time = Time.convert_distance_to_time(self.current_time, closest_address)
-            print("Delivery time is: ", self.current_time, "\nPromised delivery time was: ",
-                  self.package_list[package_index].deadline)
+            # print("Delivery time is: ", self.current_time, "\nPromised delivery time was: ",
+            #       self.package_list[package_index].deadline)
 
             new_package.update_package_delivery_time(self.current_time)  # update package delivery time
 
-            new_package.update_package_lefthub_time(self.hub_time)
-            list_of_all_packages_after_delivery.append(new_package)
+            new_package.update_package_lefthub_time(self.hub_time) # update when this package left the hub
+            list_of_all_packages_after_delivery.append(new_package) # add this package to list of delivered packages
 
-            if self.package_list[package_index].special != "":
-                print("Packing being removed special notes: ", self.package_list[package_index].special)
-            else:
-                print("Packing being removed special notes: NONE")
+            # if self.package_list[package_index].special != "":
+            #     print("Packing being removed special notes: ", self.package_list[package_index].special)
+            # else:
+            #     print("Packing being removed special notes: NONE")
 
             self.package_list.pop(package_index)
 
             self.total_distance += closest_address
 
-            print("Total distance traveled by", self.name, 'is: ', self.total_distance)
-            print()
-            print(self.name, " now contains the following packages:  ")
+            # print("Total distance traveled by", self.name, 'is: ', self.total_distance)
+            # print()
+            # print(self.name, " now contains the following packages:  ")
+            #
+            # for i in self.package_list:
+            #     i.print()
 
-            for i in self.package_list:
-                i.print()
 
-
-    def hub_return(self):
+    def hub_return(self): # O(1)
         self.total_distance += Distance.find_distance(self.current_location,
                                                       ' HUB', distance_list_dict)
         self.current_location = ' HUB'

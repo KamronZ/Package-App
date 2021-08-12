@@ -40,7 +40,7 @@ def get_dict_key_str(index, dict):
 '''Dict has a key value for every source destination.  Each value is a list.  Each list containts the distances 
 between every point.  This works because csv file is ordered and each source  '''
 
-
+# O(1)
 def find_distance(address_source, address_dest, dict):
         # dict is in format of <string, List<int> >
     if address_source not in dict.keys():

@@ -1,6 +1,6 @@
 import datetime
 
-
+# O(1)
 class Package:
     package_ID = int
 
