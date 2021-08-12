@@ -50,9 +50,10 @@ class Package:
 
     def package_status(self, time):
         if self.left_hub_timestamp > time:
-            print("Package has not left Hub")
+            print("Package id: ", self.package_ID, "| Is at the HUB |")
         if self.left_hub_timestamp <= time < self.delivery_timestamp:
-            print("Package is enroute")
+            print("Package id: ", self.package_ID, "| Is enroute |")
         if self.left_hub_timestamp <= time and self.delivery_timestamp <= time:
-            print("Package was delivered at: ", self.delivery_timestamp)
+            print("Package id:", self.package_ID, "| Was Delivered To:", self.address, self.city
+                  , self.state, "| At", self.delivery_timestamp)
 
